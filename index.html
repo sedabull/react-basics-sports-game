@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./style.css">
     <title>React Sports Game</title>
 </head>
 <body>
@@ -17,25 +18,64 @@
     <script crossorigin src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 
     <!-- include our JS+JSX for the React Appliccation -->
-<script type="text/babel">
+    <script type="text/babel">
 
-// An App component under which all other components will be added
-function App (props) {
-  return (
-    <div>
-      <h1>Welcome to the Sports Game starter!</h1>
-      <em>This file represents the way your code should look after completing the <strong>Setup</strong> steps in the instructions.</em>
-    </div>
-  )
-}
+    class Team extends React.Component {
+
+        constructor(props) {
+            super(props);
+            this.state = {
+                shots: 0,
+                score: 0
+            };//end this.state
+        }//end constructor
+
+        shoot = event => {
+            this.setState(state => {
+                return {
+                    shots: state.shots + 1,
+                    score: Math.random() < .33 ? state.score + 1 : state.score
+                }//end return changes
+            });//end setState
+        }//end shoot
+
+        render() {
+            return (
+                <div className="team">
+                    <h2 className="team-header">
+                        <img className="logo" src={this.props.logo} alt="logo"/>
+                        {this.props.name}
+                        <img className="logo" src={this.props.logo} alt="logo"/>
+                    </h2>
+                    <div>Total Score:{this.state.score}</div>
+                    <div>Total Shots Taken:{this.state.shots}</div>
+                    <div><button className="shoot" onClick={this.shoot}>SHOOT!</button></div>
+                </div>
+            );//end JSX
+        }//end render
+
+    }//end class Team
+
+    function App (props) {
+        return (
+            <div>
+                <h1>Welcome to the Sports Game!</h1>
+                <div className="arena">
+                    <Team name="Baseballs" logo="./images/baseballs.png"/>
+                    <span className="seperator">VS</span>
+                    <Team name="Basketballs" logo="./images/basketballs.png"/>
+                </div>
+            </div>
+        );//end JSX
+    }//end App
 
 
 
-// Render the App
-ReactDOM.render(
-  <App />,
-  document.getElementById('root')
-)
-</script>
+    // Render the App
+    ReactDOM.render(
+        <App />,
+        document.getElementById('root')
+    );//end render
+    </script>
 </body>
 </html>
