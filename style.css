@@ -8,16 +8,31 @@ h1 {
     text-align: center;
 }
 
+body {
+    display: flex;
+    justify-content: center;
+    background-color: rgb(158, 233, 229);
+}
+
+#root {
+    width: 800px;
+}
+
 .team {
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: lightyellow;
+    padding: 0px 5px 10px 5px;
+    border: 3px solid black;
+    border-radius: 3px;
 }
 
 .team-header {
     font-size: 50px;
     text-align: center;
-    margin: 0px 8px;
+    margin: 0px;
+    font-variant: small-caps;
 }
 
 .logo {
@@ -27,13 +42,19 @@ h1 {
     top: 10px;
 }
 
+.shoot {
+    width: 100%;
+    margin-top: 8px;
+}
+
 .arena {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
 }
 
 .seperator {
     font-size: 50px;
-    position: relative;
-    top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
