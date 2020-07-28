@@ -20,6 +20,9 @@
     <!-- include our JS+JSX for the React Appliccation -->
     <script type="text/babel">
 
+    let swish = new Audio('./audio/swish.mp3');
+    let backboard = new Audio('./audio/backboard.mp3');
+
     class Team extends React.Component {
 
         constructor(props) {
@@ -32,24 +35,38 @@
 
         shoot = event => {
             this.setState(state => {
+                if(Math.random() < .33) {
+                    state.score++;
+                    swish.play();
+                } else {
+                    backboard.play();
+                }//end if/else
+
                 return {
                     shots: state.shots + 1,
-                    score: Math.random() < .33 ? state.score + 1 : state.score
+                    score: state.score
                 }//end return changes
             });//end setState
         }//end shoot
 
         render() {
+            let accuracy = (
+                <div>Shot Percentage:
+                    <strong>{Math.trunc((this.state.score / this.state.shots) * 100)}%</strong>
+                </div>
+            );//end JSX
+
             return (
                 <div className="team">
                     <h4><em>{this.props.home ? 'HOME TEAM' : 'VISITING TEAM'}</em></h4>
                     <h2>
-                        <img className="logo" src={this.props.logo} alt="logo"/>
+                        <img src={this.props.logo} alt="logo"/>
                         {this.props.name}
-                        <img className="logo" src={this.props.logo} alt="logo"/>
+                        <img src={this.props.logo} alt="logo"/>
                     </h2><br />
-                    <div>Total Score:{this.state.score}</div>
-                    <div>Total Shots Taken:{this.state.shots}</div>
+                    <div>Total Score:<strong>{this.state.score}</strong></div>
+                    <div>Total Shots Taken:<strong>{this.state.shots}</strong></div>
+                    {this.state.shots ? accuracy : null}
                     <button className="shoot" onClick={this.shoot}>SHOOT!</button>
                 </div>
             );//end JSX
@@ -57,26 +74,28 @@
 
     }//end class Team
 
-    function App (props) {
-        return (
-            <div>
-                <h1>Welcome to the Sports Game!</h1>
-                <div className="arena">
-                    <Team name="Baseballs" logo="./images/baseballs.png" home={false}/>
-                    <span className="seperator">VS</span>
-                    <Team name="Basketballs" logo="./images/basketballs.png" home={true}/>
+    class Game extends React.Component {
+
+        render() {
+            return (
+                <div className="game">
+                    <h1>Welcome to the {this.props.venue}!</h1>
+                    <div className="arena">
+                        <Team name="Baseballs" logo="./images/baseballs.png" home={false}/>
+                        <span>VS</span>
+                        <Team name="Basketballs" logo="./images/basketballs.png" home={true}/>
+                    </div>
                 </div>
-            </div>
-        );//end JSX
+            );//end JSX
+        }//end render
+
+    }//end class Game
+
+    function App(props) {
+        return <Game venue="Stadium Generica" />
     }//end App
 
-
-
-    // Render the App
-    ReactDOM.render(
-        <App />,
-        document.getElementById('root')
-    );//end render
+    ReactDOM.render(<App />, document.getElementById('root'));
     </script>
 </body>
 </html>
