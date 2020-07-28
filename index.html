@@ -42,7 +42,8 @@
         render() {
             return (
                 <div className="team">
-                    <h2 className="team-header">
+                    <h4><em>{this.props.home ? 'HOME TEAM' : 'VISITING TEAM'}</em></h4>
+                    <h2>
                         <img className="logo" src={this.props.logo} alt="logo"/>
                         {this.props.name}
                         <img className="logo" src={this.props.logo} alt="logo"/>
@@ -61,9 +62,9 @@
             <div>
                 <h1>Welcome to the Sports Game!</h1>
                 <div className="arena">
-                    <Team name="Baseballs" logo="./images/baseballs.png"/>
+                    <Team name="Baseballs" logo="./images/baseballs.png" home={false}/>
                     <span className="seperator">VS</span>
-                    <Team name="Basketballs" logo="./images/basketballs.png"/>
+                    <Team name="Basketballs" logo="./images/basketballs.png" home={true}/>
                 </div>
             </div>
         );//end JSX
