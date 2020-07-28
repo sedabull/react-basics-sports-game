@@ -14,12 +14,26 @@ body {
     background-color: rgb(233, 226, 158);
 }
 
+button {
+    width: 100%;
+    font-size: 28px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: rgb(245, 245, 167);
+    background-color: rgb(185, 185, 8);
+}
+
 #root {
     width: 800px;
 }
 
 .game h1 {
     margin: 10px 0px;
+}
+
+.game > button {
+    margin-top: 5px;
+    font-size: 50px;
 }
 
 .team {
@@ -51,14 +65,6 @@ body {
     height: 50px;
     position: relative;
     top: 10px;
-}
-
-.team button {
-    width: 100%;
-    margin-top: 8px;
-    font-weight: bold;
-    color: lightyellow;
-    background-color: rgb(180, 180, 1);
 }
 
 .arena {
